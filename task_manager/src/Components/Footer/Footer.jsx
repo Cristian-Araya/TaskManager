@@ -1,14 +1,19 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components'
+
+const FooterStyled = styled.div`
+    
+`;
 
 const Footer = () => {
     return (
-        <div>
+        <FooterStyled>
             <footer className="bg-dark text-light text-center text-lg-start fixed-bottom">
-                <div className="text-center p-3">
-                    © 2020 Copyright: CristianAraya.com
+                <div className="text-center p-4">
+                    © 2021 Copyright: CristianAraya.com
                 </div>
             </footer>
-        </div>
+        </FooterStyled>
     )
 }
 
