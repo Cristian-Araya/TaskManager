@@ -1,23 +1,17 @@
 import React from 'react'
-import styled from 'styled-components'
 
 const Navbar = () => {
-    const NavbarStyled = styled.div`
-    .title-text{
-        color:red;
-    }
-    `;
     return (
 
-        <NavbarStyled>
-            <nav className="navbar navbar-light bg-light">
+        <div>
+            <nav className="navbar navbar-dark bg-dark justify-content-center">
                 <div className="navbar-brand mb-0">
-                    <span className="title-text text-center">
+                    <span className="title-text">
                         Task Manager
                     </span>
                 </div>
             </nav>
-        </NavbarStyled>
+        </div>
     )
 }
 
