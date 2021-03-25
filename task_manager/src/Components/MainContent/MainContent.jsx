@@ -1,17 +1,34 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import shortid from 'shortid'
+import {firebase} from '../../firebase'
 
 
 const MainContent = () => {
 
- 
     const [taskName,setTaskName] = useState('')
     const [taskDes,setTaskDes] = useState('')
     const [listTask,setListTask] = useState([])
     const [modoEdicion,setModoEdicion] = useState(false)
+    useEffect (()=>{
+             
+        const getTask = async () =>{
+            try {
+                const db = firebase.firestore()
+                const data = await db.collection('Task').get()
+                const arrayData = data.docs.map(doc=> ({id: doc.id, ...doc.data() }))
+                console.log(arrayData)
+                setListTask(arrayData)
+                console.log(listTask)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getTask()
+    },[])
     const [id,setId] = useState('')
-    
-    const addTask = e => {
+
+
+    const addTask = async (e) => {
         e.preventDefault()
         if(!taskName.trim()){
             console.log('Falta una Nombre')
@@ -21,6 +38,19 @@ const MainContent = () => {
             console.log('Falta una Descripcion')
             return
         }
+
+        try {
+            const db = firebase.firestore()
+            const newTask = {
+                name: taskName,
+                description: taskDes,
+            }
+            const data = await db.collection('Task').add(newTask)
+
+        } catch (error) {
+            console.log(error)
+        }
+
         setListTask([
             ...listTask, 
             {
